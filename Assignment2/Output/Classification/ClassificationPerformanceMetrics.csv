@@ -1,0 +1,21 @@
+Account No,26435791004,
+Logistic Regression,,
+Overall Error,23%,
+,,
+,Optimal,Above_Normal
+Optimal,1159,269
+Above_Normal,139,257
+,,
+Classification Tree,,
+Overall Error,15%,
+,,
+,Optimal,Above_Normal
+Optimal,1204,165
+Above_Normal,94,361
+,,
+Neural Network,,
+Overall Error,25%,
+,,
+,Optimal,Above_Normal
+Optimal,1073,216
+Above_Normal,225,310
