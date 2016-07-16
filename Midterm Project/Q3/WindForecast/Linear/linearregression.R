@@ -1,7 +1,7 @@
 library(ISLR)
 library(MASS)
 library(leaps)
-setwd("G:/Sem3/ADS/Midterm/EnergyForecast/")
+setwd("G:/Sem3/ADS/Midterm/EnergyForecast/Linear")
 
 #============================================================================================================
 
@@ -172,5 +172,83 @@ influential <- as.numeric(names(cooksd)[(cooksd > 10*mean(cooksd, na.rm=T))])  #
 influencers <- train7[influential, ]
 head(influencers)
 model7<- train7[-influential, ]
-
 #===========================================================================================================
+
+#multiple linear regression for each model
+lm.fit1=lm(wp1~.-Date-OnlyDate-month-year,data=model1)
+summary(lm.fit1)
+pred = predict(lm.fit1, test1)
+accuracy(pred, test1$wp1)
+
+
+lm.fit2=lm(wp2~.-Date-OnlyDate-month-u, data=model2)
+summary(lm.fit2)
+library(forecast)
+pred = predict(lm.fit2, test2)
+accuracy(pred, test2$wp2)
+
+
+lm.fit3=lm(wp3~.-Date-OnlyDate-year-month-wd, data=model3)
+summary(lm.fit3)
+library(forecast)
+pred = predict(lm.fit3, test3)
+accuracy(pred, test3$wp3)
+
+
+lm.fit4=lm(wp4~.-Date-OnlyDate-year-u-month, data=model4)
+summary(lm.fit4)
+library(forecast)
+pred = predict(lm.fit4, test4)
+accuracy(pred, test4$wp4)
+
+
+lm.fit5=lm(wp5~.-Date-OnlyDate-month+I(u^2)+I(wd^2), data=model5)
+summary(lm.fit5)
+library(forecast)
+pred = predict(lm.fit5, test5)
+accuracy(pred, test5$wp5)
+
+
+lm.fit6=lm(wp6~.-Date-OnlyDate-year-u, data=model6)
+summary(lm.fit6)
+library(forecast)
+pred = predict(lm.fit6, test6)
+accuracy(pred, test6$wp6)
+
+
+lm.fit7=lm(wp7~.-Date-OnlyDate-u-year-month, data=model7)
+summary(lm.fit7)
+library(forecast)
+pred = predict(lm.fit7, test7)
+accuracy(pred, test7$wp7)
+
+
+#=============================================================================================================
+#Forecast
+forecastDates <- train.data.model[,c(9)]
+
+#creating forecast data files by removing dates of tarain.csv from each wind farm files
+forecastData1 <- wf1[!(wf1$Date %in% forecastDates),]
+forecastData2 <- wf2[!(wf2$Date %in% forecastDates),]
+forecastData3 <- wf3[!(wf3$Date %in% forecastDates),]
+forecastData4 <- wf4[!(wf4$Date %in% forecastDates),]
+forecastData5 <- wf5[!(wf5$Date %in% forecastDates),]
+forecastData6 <- wf6[!(wf6$Date %in% forecastDates),]
+forecastData7 <- wf7[!(wf7$Date %in% forecastDates),]
+
+#Forecast for each wind farm
+forecastOutput1<-predict(lm.fit1, newdata=forecastData1)
+forecastOutput2<-predict(lm.fit2, newdata=forecastData2)
+forecastOutput3<-predict(lm.fit3, newdata=forecastData3)
+forecastOutput4<-predict(lm.fit4, newdata=forecastData4)
+forecastOutput5<-predict(lm.fit5, newdata=forecastData5)
+forecastOutput6<-predict(lm.fit6, newdata=forecastData6)
+forecastOutput7<-predict(lm.fit7, newdata=forecastData7)
+
+#forecast for regression tree
+linerRegressionForecast <- data.frame(id = c(1:length(forecastOutput1)),date = forecastData1$Date,wp1 = forecastOutput1,wp2 = forecastOutput2,
+                                     wp3 = forecastOutput3,wp4 = forecastOutput4,
+                                     wp5 = forecastOutput5,wp6 = forecastOutput6,wp7 = forecastOutput7)
+
+write.csv(linerRegressionForecast, "benchmark_linearmodel.csv",row.names = FALSE);
+
