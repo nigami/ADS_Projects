@@ -1,0 +1,41 @@
+#formDetailId div label.textColorYellow{
+	color: #fed136
+}
+#displayDiv{
+	margin-top:18px;
+	display: none;
+	/* background-color: white; */
+	width: 1085px;
+    margin-left: 279px;
+  /*   height: 15em; */
+}
+
+div#displayDiv div.noPadding{
+
+	background-color: #4c4c4c;
+	color: #FED136;
+	font-family: "Brush Script MT", cursive;
+	font-size:35px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+	
+}
+
+input#getFlightDetailsBtnId{
+	width: 198px;
+}
+
+div #delayedTime{
+	visibility: hidden;
+	margin-left: 52px;
+}
+
+
+
+select#carrier.form-control{
+	padding-left:34px;
+	width: 220px;
+    height: 65px;
+}
