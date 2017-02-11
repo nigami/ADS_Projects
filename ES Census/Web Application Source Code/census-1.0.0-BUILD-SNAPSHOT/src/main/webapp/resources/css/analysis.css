@@ -1,0 +1,42 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	background-color: black;
+	 opacity:.9;
+	padding: 0px;
+	width: 100%;
+	   overflow-x: hidden;	 
+	
+}
+.div25{
+	padding: 0px;
+	margin: auto;
+	width: 16%;
+	height:100%;
+	/* background-color:green; */
+}
+
+.div75{
+	width: 84%;
+	height:100%;
+	/* background-color:blue; */
+	
+}
+
+.navy{
+	z-index: 4;
+}
+
+
+.centered-form{
+	margin-top: 10px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(255,255,255, 0.3) 20px 20px 20px;
+}
+
+label {
+    font-weight: normal;
+}
